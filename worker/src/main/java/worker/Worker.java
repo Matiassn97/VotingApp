@@ -67,6 +67,8 @@ class Worker {
 
     try {
 
+      var postgres_user = process.env.POSTGRESQL_USER;
+      var postgres_password = process.env.POSTGRESQL_PASSWORD;
       Class.forName("org.postgresql.Driver");
       String url = "jdbc:postgresql://" + host + "/postgres";
 
