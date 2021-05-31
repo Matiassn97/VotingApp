@@ -66,15 +66,15 @@ class Worker {
     Connection conn = null;
 
     try {
-
-      var postgres_user = process.env.POSTGRESQL_USER;
-      var postgres_password = process.env.POSTGRESQL_PASSWORD;
+      Map<String, String> env = System.getenv();
+      String postgres_user = env.get("POSTGRESQL_USER");
+      String postgres_password = env.get("POSTGRESQL_PASSWORD");
       Class.forName("org.postgresql.Driver");
       String url = "jdbc:postgresql://" + host + "/postgres";
 
       while (conn == null) {
         try {
-          conn = DriverManager.getConnection(url, "postgres_user", "postgres_password");
+          conn = DriverManager.getConnection(url, postgres_user, postgres_password);
         } catch (SQLException e) {
           System.err.println("Waiting for db");
           sleep(1000);
